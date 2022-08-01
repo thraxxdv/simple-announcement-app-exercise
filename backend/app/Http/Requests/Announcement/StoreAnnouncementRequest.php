@@ -13,7 +13,7 @@ class StoreAnnouncementRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreAnnouncementRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required', 'string'],
+            'content' => ['required', 'string'],
+            'start_date' => ['required', 'date','after:today'],
+            'end_date' => ['required', 'date', 'after:start_date']
         ];
     }
 }
