@@ -20,7 +20,6 @@ return new class extends Migration
             $table->longText('content');
             $table->date('start_date');
             $table->date('end_date');
-            $table->timestamps();
         });
     }
 
