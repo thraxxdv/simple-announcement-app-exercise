@@ -13,7 +13,7 @@ services:
   laravel:
     image: docker.io/bitnami/laravel:9
     ports:
-      - '8000:8000'
+      - '8080:8000'
     environment:
       - DB_HOST=mariadb
       - DB_PORT=3306
@@ -23,7 +23,7 @@ services:
       - './backend:/app'
     depends_on:
       - mariadb
-    command: bash -c "composer install"
+    command: bash -c "composer install && php artisan migrate && php artisan serve --host=0.0.0.0 --port=8000"
   nextjs:
     image: node:latest
     working_dir: '/app'
