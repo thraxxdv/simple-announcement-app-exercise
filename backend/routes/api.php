@@ -25,5 +25,5 @@ Route::prefix('v1')->group(function(){
         Route::post('login', [AuthController::class, 'login']);
     });
 
-    Route::resource('announcements', AnnouncementController::class);
+    Route::resource('announcements', AnnouncementController::class)->middleware(['auth:sanctum']);
 });
