@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreAnnouncementRequest;
-use App\Http\Requests\UpdateAnnouncementRequest;
+use App\Http\Requests\Announcement\StoreAnnouncementRequest;
+use App\Http\Requests\Announcement\UpdateAnnouncementRequest;
 use App\Models\Announcement;
 use App\Services\AnnouncementService;
 
@@ -34,7 +34,9 @@ class AnnouncementController extends Controller
      */
     public function store(StoreAnnouncementRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        return response()->json($this->announcementService->createAnnouncement($validated));
     }
 
     /**
