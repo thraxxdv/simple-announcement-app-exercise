@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAnnouncementRequest;
 use App\Http\Requests\UpdateAnnouncementRequest;
 use App\Models\Announcement;
+use App\Services\AnnouncementService;
 
 class AnnouncementController extends Controller
 {
+
+    private $announcementService;
+
+    public function __construct() {
+        $this->announcementService = new AnnouncementService();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,7 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json($this->announcementService->getAnnouncements());
     }
 
     /**
