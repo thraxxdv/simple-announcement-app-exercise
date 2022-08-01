@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\v1\AnnouncementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
