@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->string('title');
+            $table->longText('content');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }
