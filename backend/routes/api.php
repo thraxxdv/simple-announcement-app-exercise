@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function(){
-    Route::get('announcements', [AnnouncementController::class, 'index']);
+    Route::resource('announcements', AnnouncementController::class);
 });
