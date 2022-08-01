@@ -17,7 +17,6 @@ class Announcement extends Model
     protected function title(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value,
             set: fn ($value) => strip_tags($value)
         );
     }
@@ -25,7 +24,6 @@ class Announcement extends Model
     protected function content(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value,
             set: fn ($value) => strip_tags($value)
         );
     }
