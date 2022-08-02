@@ -10,6 +10,8 @@ services:
       - MARIADB_DATABASE=announcement_db
     ports:
       - 4306:3306
+    networks:
+      - announcement-app-network
   laravel:
     image: docker.io/bitnami/laravel:9
     ports:
@@ -24,6 +26,8 @@ services:
     depends_on:
       - mariadb
     command: bash -c "composer install && php artisan migrate && php artisan serve --host=0.0.0.0 --port=8000"
+    networks:
+      - announcement-app-network
   nextjs:
     image: node:latest
     working_dir: '/app'
@@ -32,3 +36,8 @@ services:
       - './frontend:/app'
     ports:
       - 4000:3000
+    networks:
+      - announcement-app-network
+  
+networks:
+  announcement-app-network:
