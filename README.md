@@ -21,12 +21,15 @@ This project automatically seeds
 
 **Frontend** - The frontend api is pointed to `localhost:4000`. Visiting that should take you to a login page where you can login with `test@test.com` and password as `password`
 
-### Project breakdown
+## Project breakdown
 The backend is 80% done with only deleting announcement missing and unit tests. The frontend has a lot missing, but at this point in the project it only needs to be calling APIs.
 
 So far, these are the completed API routes
 
 `POST /api/v1/auth/login` - Logging in route
+
 `POST /api/v1/auth/check` - To check if API token is still valid
+
 `GET /api/v1/announcements` - Get announcements
+
 `POST /api/v1/announcements` - Store announcements to DB
