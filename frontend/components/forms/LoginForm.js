@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Input from "./elements/Input";
 import Button from "./elements/Button";
 import { login } from "../../api/auth";
+import Handle422Error from "../../utils/Handle422Error";
+import { toast } from "react-toastify";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -9,13 +11,19 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     login(email, password)
       .then((r) => {
         console.log(r);
       })
       .catch((e) => {
-        console.log(e);
+        let status = e.response.status;
+        console.log(status);
+        if (status == 422) {
+          Handle422Error(e.response.data.errors);
+        } else if (status == 401) {
+          toast("Invalid login credentials", { type: "error" });
+        }
       });
   };
 
