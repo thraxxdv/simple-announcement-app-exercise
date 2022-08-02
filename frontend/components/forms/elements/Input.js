@@ -7,7 +7,8 @@ function Input({
   value = "",
   onChangeCb = () => null,
   placeholder = "",
-  containerClass = ''
+  containerClass = '',
+  required = 'required'
 }) {
   return (
     <div className={containerClass}>
@@ -20,6 +21,7 @@ function Input({
         onChange={onChangeCb}
         placeholder={placeholder ? placeholder : name}
         className="form-control"
+        required={required}
       />
     </div>
   );

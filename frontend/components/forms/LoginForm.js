@@ -7,7 +7,7 @@ function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
 
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email)
   }
@@ -17,7 +17,7 @@ function LoginForm() {
       <h1 className="fw-bold text-primary">Login</h1>
       <p>Login with your credentials below</p>
       <hr className="my-4" />
-      <form action="" onSubmit={(e) => e.preventDefault()}>
+      <form action="" onSubmit={handleSubmit}>
         <Input
           name="email"
           type="email"
@@ -35,7 +35,7 @@ function LoginForm() {
           onChangeCb={(e) => setPassword(e.target.value)}
           containerClass="my-3"
         />
-        <Button type="submit" additionalClasses="mx-auto d-block" onClickCb={handleClick}/>
+        <Button type="submit" additionalClasses="mx-auto d-block"/>
       </form>
     </div>
   );
