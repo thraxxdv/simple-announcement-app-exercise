@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -21,5 +22,10 @@ class AuthController extends Controller
         $validated = $request->validated();
 
         return response()->json($this->authService->authenticateUser($validated['email'], $validated['password']));
+    }
+
+    public function authCheck(Request $request)
+    {
+        return Auth::check();
     }
 }

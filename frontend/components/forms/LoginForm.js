@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "./elements/Input";
 import Button from "./elements/Button";
-import { login } from "../../api/auth";
+import { authCheck, login } from "../../api/auth";
 import Handle422Error from "../../utils/Handle422Error";
 import { toast } from "react-toastify";
 
@@ -14,7 +14,8 @@ function LoginForm() {
 
     login(email, password)
       .then((r) => {
-        console.log(r);
+        localStorage.setItem("token", r.data.token);
+        authCheck().then(r => console.log(r)).catch(e => console.log(e))
       })
       .catch((e) => {
         let status = e.response.status;

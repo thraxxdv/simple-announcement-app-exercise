@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function(){
     Route::prefix('auth')->group(function(){
         Route::post('login', [AuthController::class, 'login']);
+        Route::post('check', [AuthController::class, 'authCheck'])->middleware(['auth:sanctum']);
     });
 
     Route::resource('announcements', AnnouncementController::class)->middleware(['auth:sanctum']);
