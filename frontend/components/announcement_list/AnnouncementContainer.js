@@ -2,7 +2,9 @@ import React from 'react'
 
 function AnnouncementContainer() {
   return (
-    <div>AnnouncementContainer</div>
+    <div className="row">
+        
+    </div>
   )
 }
 

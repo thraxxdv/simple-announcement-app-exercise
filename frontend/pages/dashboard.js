@@ -1,6 +1,7 @@
 import React from "react";
 import AuthenticatedLayout from "../components/layouts/AuthenticatedLayout";
 import AddAnnouncementForm from "../components/forms/AddAnnouncementForm";
+import AnnouncementContainer from "../components/announcement_list/AnnouncementContainer";
 
 function Dashboard() {
   return (
@@ -11,7 +12,7 @@ function Dashboard() {
             <AddAnnouncementForm />
           </div>
           <div className="col-lg-7">
-            
+            <AnnouncementContainer />
           </div>
         </div>
       </div>
