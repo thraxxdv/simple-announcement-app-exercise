@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./elements/Input";
 import Button from "./elements/Button";
 import { createAnnouncement } from "../../api/announcement";
@@ -6,13 +6,28 @@ import Handle422Error from "../../utils/Handle422Error";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
-function AnnouncementForm() {
+function AnnouncementForm({announcementId = 0}) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
   const router = useRouter();
+
+  useEffect(() => {
+
+    if (announcementId !== 0) {
+      console.log(announcementId);
+    }
+
+    return () => {
+      setTitle("");
+      setContent("");
+      setStartDate("");
+      setEndDate("");
+    }
+  }, [announcementId])
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();

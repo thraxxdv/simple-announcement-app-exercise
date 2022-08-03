@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAnnouncements } from "../../api/announcement";
 import AnnouncementItem from "./AnnouncementItem";
 
-function AnnouncementContainer() {
+function AnnouncementContainer({setSelectedAnnouncementId}) {
   const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
@@ -22,6 +22,7 @@ function AnnouncementContainer() {
             content={obj.content}
             startDate={obj.start_date}
             endDate={obj.end_date}
+            setEditingId={setSelectedAnnouncementId}
           />
         ))
       ) : (

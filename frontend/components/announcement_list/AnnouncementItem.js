@@ -4,7 +4,7 @@ import { DateFormatter } from "../../utils/DateFormatter";
 import Button from "../forms/elements/Button";
 import AnnouncementStatus from "./AnnouncementStatus";
 
-function AnnouncementItem({ id, title, content, startDate, endDate }) {
+function AnnouncementItem({ id, title, content, startDate, endDate, setEditingId }) {
 
   const handleDelete = () => {
     console.log(id)
@@ -19,6 +19,13 @@ function AnnouncementItem({ id, title, content, startDate, endDate }) {
       <p>
         {DateFormatter(startDate)} to {DateFormatter(endDate)}
       </p>
+      <Button
+        label="Edit Announcement"
+        type="button"
+        btnType="btn-secondary"
+        additionalClasses="d-block ms-auto"
+        onClickCb={() => setEditingId(id)}
+      />
       <Button
         label="Delete Announcement"
         type="button"
