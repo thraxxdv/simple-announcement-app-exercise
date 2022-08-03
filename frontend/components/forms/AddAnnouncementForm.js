@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Input from "./elements/Input";
 import Button from "./elements/Button";
 import { createAnnouncement } from "../../api/announcement";
+import Handle422Error from "../../utils/Handle422Error";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 function AddAnnouncementForm() {
   const [title, setTitle] = useState("");
@@ -9,15 +12,25 @@ function AddAnnouncementForm() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
+  const router = useRouter();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     createAnnouncement(title, content, startDate, endDate)
       .then((r) => {
-        console.log(r);
+        toast("Announcement added succesfully! Page will reload in 5 seconds...", {
+          autoClose: false,
+          type: "success"
+        });
+        setTimeout(() => {
+          router.reload(window.location.pathname)
+        }, 5000);
       })
       .catch((e) => {
-        console.log(e);
+        if (e.response.status == 422) {
+          Handle422Error(e.response.data.errors);
+        }
       });
   };
 
