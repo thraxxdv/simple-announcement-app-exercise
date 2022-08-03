@@ -26,7 +26,7 @@ class StoreAnnouncementRequest extends FormRequest
         return [
             'title' => ['required', 'string'],
             'content' => ['required', 'string'],
-            'start_date' => ['required', 'date','after:today'],
+            'start_date' => ['required', 'date','after_or_equal:today'],
             'end_date' => ['required', 'date', 'after:start_date']
         ];
     }

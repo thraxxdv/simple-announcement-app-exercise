@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "./elements/Input";
 import Button from "./elements/Button";
+import { createAnnouncement } from "../../api/announcement";
 
 function AddAnnouncementForm() {
   const [title, setTitle] = useState("");
@@ -8,8 +9,20 @@ function AddAnnouncementForm() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    createAnnouncement(title, content, startDate, endDate)
+      .then((r) => {
+        console.log(r);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
-    <form action="" className="p-5 shadow mt-4 rounded">
+    <form action="" className="p-5 shadow mt-4 rounded" onSubmit={handleSubmit}>
       <h1 className="fw-bold mb-4">Add New Announcement</h1>
       <Input
         name="title"
@@ -47,7 +60,10 @@ function AddAnnouncementForm() {
           containerClass="flex-grow-1 ms-2"
         />
       </div>
-        <Button label="Add Announcement" additionalClasses="mt-4 mx-auto d-block" />
+      <Button
+        label="Add Announcement"
+        additionalClasses="mt-4 mx-auto d-block"
+      />
     </form>
   );
 }
