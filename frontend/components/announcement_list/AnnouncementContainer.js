@@ -17,6 +17,7 @@ function AnnouncementContainer() {
         announcements.map((obj) => (
           <AnnouncementItem
             key={obj.id}
+            id={obj.id}
             title={obj.title}
             content={obj.content}
             startDate={obj.start_date}

@@ -1,9 +1,15 @@
 import moment from "moment";
 import React from "react";
 import { DateFormatter } from "../../utils/DateFormatter";
+import Button from "../forms/elements/Button";
 import AnnouncementStatus from "./AnnouncementStatus";
 
-function AnnouncementItem({ title, content, startDate, endDate }) {
+function AnnouncementItem({ id, title, content, startDate, endDate }) {
+
+  const handleDelete = () => {
+    console.log(id)
+  }
+
   return (
     <div className="shadow bg-white p-4 mb-3">
       <h4 className="fw-bold flex-grow-1">
@@ -13,6 +19,13 @@ function AnnouncementItem({ title, content, startDate, endDate }) {
       <p>
         {DateFormatter(startDate)} to {DateFormatter(endDate)}
       </p>
+      <Button
+        label="Delete Announcement"
+        type="button"
+        btnType="btn-danger"
+        additionalClasses="d-block ms-auto"
+        onClickCb={handleDelete}
+      />
     </div>
   );
 }
