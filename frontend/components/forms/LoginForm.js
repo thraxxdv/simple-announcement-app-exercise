@@ -4,10 +4,13 @@ import Button from "./elements/Button";
 import { authCheck, login } from "../../api/auth";
 import Handle422Error from "../../utils/Handle422Error";
 import { toast } from "react-toastify";
+import {useRouter} from "next/router"
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +18,7 @@ function LoginForm() {
     login(email, password)
       .then((r) => {
         localStorage.setItem("token", r.data.token);
-        authCheck().then(r => console.log(r)).catch(e => console.log(e))
+        router.push("/dashboard");
       })
       .catch((e) => {
         let status = e.response.status;
@@ -29,7 +32,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-100 shadow p-5">
+    <div className="w-100 shadow p-5 rounded">
       <h1 className="fw-bold text-primary">Login</h1>
       <p>Login with your credentials below</p>
       <hr className="my-4" />
