@@ -18,9 +18,8 @@ class AnnouncementFactory extends Factory
      */
     public function definition()
     {
-        $startDate = $this->faker->dateTimeBetween('now', '+60 days');
-        $endDate   = date('Y-m-d', strtotime('+'.rand(1, 7).' days', $startDate->getTimestamp()));
-        // $startDate = ();
+        $startDate = $this->faker->dateTimeBetween('-15 days', '+15 days');
+        $endDate   = date('Y-m-d', strtotime("+" .rand(1, 7) . ' days', $startDate->getTimestamp()));
 
         return [
             'user_id' => User::inRandomOrder()->first()->id,
