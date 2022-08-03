@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class AnnouncementService {
     public function getAnnouncements()
     {
-        return Announcement::orderByDesc('id')->get();
+        return Announcement::orderByDesc('start_date')->get();
     }
 
     public function createAnnouncement(array $validatedData)
