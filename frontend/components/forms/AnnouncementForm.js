@@ -6,7 +6,7 @@ import Handle422Error from "../../utils/Handle422Error";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
-function AddAnnouncementForm() {
+function AnnouncementForm() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -81,4 +81,4 @@ function AddAnnouncementForm() {
   );
 }
 
-export default AddAnnouncementForm;
+export default AnnouncementForm;
