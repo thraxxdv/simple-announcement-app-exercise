@@ -25,7 +25,6 @@ class AnnouncementRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => [Rule::requiredIf(fn () => $this->isMethod('PUT'))],
             'title' => ['required', 'string'],
             'content' => ['required', 'string'],
             'start_date' => ['required', 'date'],
