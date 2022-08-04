@@ -10,64 +10,29 @@ use App\Services\AnnouncementService;
 
 class AnnouncementController extends Controller
 {
-
-    private $announcementService;
-
-    public function __construct() {
-        $this->announcementService = new AnnouncementService();
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        return response()->json($this->announcementService->getAnnouncements());
+        return response()->json(Announcement::orderByDesc('start_date')->get());
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreAnnouncementRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(StoreAnnouncementRequest $request)
     {
         $validated = $request->validated();
 
-        return response()->json($this->announcementService->createAnnouncement($validated));
+        return response()->json(Announcement::create($validated));
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Announcement  $announcement
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(Announcement $announcement)
     {
         return response()->json($announcement);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateAnnouncementRequest  $request
-     * @param  \App\Models\Announcement  $announcement
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(UpdateAnnouncementRequest $request, Announcement $announcement)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Announcement  $announcement
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Announcement $announcement)
     {
         //
