@@ -26,5 +26,5 @@ Route::prefix('v1')->group(function(){
         Route::post('check', [AuthController::class, 'authCheck'])->middleware(['auth:sanctum']);
     });
 
-    Route::resource('announcements', AnnouncementController::class)->middleware(['auth:sanctum']);
+    Route::resource('announcements', AnnouncementController::class)->except(['edit', 'create'])->middleware(['auth:sanctum']);
 });
