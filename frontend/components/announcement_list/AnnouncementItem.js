@@ -46,7 +46,10 @@ function AnnouncementItem({
         label="Edit Announcement"
         type="button"
         btnType="btn-secondary"
-        onClickCb={() => setEditingId(id)}
+        onClickCb={() => {
+          setEditingId(id);
+          window.scrollTo({top: 0, behavior: "smooth"});
+        }}
       />
       <Button
         label="Delete Announcement"
