@@ -1,11 +1,10 @@
 import axios from "axios";
 import { GetToken } from "../utils/GetToken";
-import { AuthHeader } from "./config";
 
 export const getAnnouncements = () => {
   return axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/announcements`, {
     headers: {
-      ...AuthHeader,
+      "Authorization": `Bearer ${GetToken()}`
     },
   });
 };
@@ -21,7 +20,7 @@ export const createAnnouncement = (title, content, startDate, endDate) => {
     },
     {
       headers: {
-        ...AuthHeader,
+        "Authorization": `Bearer ${GetToken()}`
       },
     }
   );
@@ -32,7 +31,7 @@ export const getAnnouncement = (id) => {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/announcements/${id}`,
     {
       headers: {
-        ...AuthHeader,
+        "Authorization": `Bearer ${GetToken()}`
       },
     }
   );

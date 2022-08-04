@@ -4,7 +4,8 @@ import Button from "./elements/Button";
 import { authCheck, login } from "../../api/auth";
 import Handle422Error from "../../utils/Handle422Error";
 import { toast } from "react-toastify";
-import {useRouter} from "next/router"
+import { useRouter } from "next/router";
+import { GetToken } from "../../utils/GetToken";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,9 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Remove any existing tokens
+    localStorage.removeItem("token");
 
     login(email, password)
       .then((r) => {
