@@ -72,6 +72,17 @@ class AnnouncementTest extends TestCase
             'content' => $this->faker->sentence(15),
             'start_date' => date('Y-m-d', $startDate->getTimestamp()),
             'end_date' => $endDate
-        ])->assertNoContent(204);
+        ])->assertNoContent();
+    }
+
+    public function test_delete_announcement()
+    {
+        $getUser = new GetRandomUser();
+        $user = $getUser->handle();
+        Sanctum::actingAs($user, ['auth_token']);
+
+        $announcement = Announcement::first();
+
+        $this->deleteJson("/api/v1/announcements/" . $announcement->id)->assertNoContent();
     }
 }
