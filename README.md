@@ -35,3 +35,10 @@ _This project automatically seeds test data into the database_
 `POST     api/v1/auth/check` - Route for checking auth token validity.
 `POST     api/v1/auth/login` - Login route.
 `POST     api/v1/auth/logout` - Logout route.
+
+## Running Unit Tests
+To run unit tests, run `docker-compose exec laravel php artisan test`.
+
+## Accessing CLIs
+To run backend commands, type in `docker-compose exec laravel <command>`.
+To run frontend commands, type in `docker-compose exec nextjs <command>`.
