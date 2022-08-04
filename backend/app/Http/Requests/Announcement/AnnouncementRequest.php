@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Announcement;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreAnnouncementRequest extends FormRequest
+class AnnouncementRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +25,7 @@ class StoreAnnouncementRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => [Rule::requiredIf(fn () => $this->isMethod('PUT'))],
             'title' => ['required', 'string'],
             'content' => ['required', 'string'],
             'start_date' => ['required', 'date','after_or_equal:today'],
