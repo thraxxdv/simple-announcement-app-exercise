@@ -1,14 +1,37 @@
 import moment from "moment";
 import React from "react";
+import { deleteAnnouncement } from "../../api/announcement";
 import { DateFormatter } from "../../utils/DateFormatter";
 import Button from "../forms/elements/Button";
 import AnnouncementStatus from "./AnnouncementStatus";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
-function AnnouncementItem({ id, title, content, startDate, endDate, setEditingId }) {
+function AnnouncementItem({
+  id,
+  title,
+  content,
+  startDate,
+  endDate,
+  setEditingId,
+}) {
+  const router = useRouter();
 
   const handleDelete = () => {
-    console.log(id)
-  }
+    deleteAnnouncement(id).then((r) => {
+      toast(
+        "Announcement DELETED succesfully! Page will reload in 3 seconds...",
+        {
+          autoClose: false,
+          type: "success",
+        }
+      );
+
+      setTimeout(() => {
+        router.reload(window.location.pathname);
+      }, 3000);
+    });
+  };
 
   return (
     <div className="shadow bg-white p-4 mb-3">

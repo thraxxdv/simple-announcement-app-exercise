@@ -41,6 +41,8 @@ class AnnouncementController extends Controller
 
     public function destroy(Announcement $announcement)
     {
-        //
+        $announcement->delete();
+
+        return response('', 204);
     }
 }
