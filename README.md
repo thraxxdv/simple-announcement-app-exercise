@@ -28,12 +28,19 @@ _This project automatically seeds test data into the database_
 **Auth Routes**
 
 `GET      api/v1/announcements` - Get announcements, sorted descending by start date.
+
 `POST     api/v1/announcements` - Create announcement.
+
 `GET      api/v1/announcements/{announcement}` - Get a single announcement.
+
 `PUT      api/v1/announcements/{announcement}` - Update an announcement.
+
 `DELETE   api/v1/announcements/{announcement}` - Delete an announcement,
+
 `POST     api/v1/auth/check` - Route for checking auth token validity.
+
 `POST     api/v1/auth/login` - Login route.
+
 `POST     api/v1/auth/logout` - Logout route.
 
 ## Running Unit Tests
