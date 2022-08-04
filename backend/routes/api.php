@@ -21,10 +21,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function(){
+
     Route::prefix('auth')->group(function(){
+
         Route::post('login', [AuthController::class, 'login']);
-        Route::post('check', [AuthController::class, 'authCheck'])->middleware(['auth:sanctum']);
+
+        Route::middleware(['auth:sanctum'])->group(function(){
+            Route::post('check', [AuthController::class, 'authCheck']);
+            Route::post('logout', [AuthController::class, 'logout']);
+        });
+
     });
 
     Route::resource('announcements', AnnouncementController::class)->except(['edit', 'create'])->middleware(['auth:sanctum']);
+    
 });

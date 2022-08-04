@@ -24,6 +24,13 @@ class AuthController extends Controller
         return response()->json($this->authService->authenticateUser($validated['email'], $validated['password']));
     }
 
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response('', 204);
+    }
+
     public function authCheck(Request $request)
     {
         return Auth::check();

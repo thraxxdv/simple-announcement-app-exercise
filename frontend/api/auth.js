@@ -19,3 +19,15 @@ export const authCheck = () => {
     }
   );
 };
+
+export const logout = () => {
+  return axios.post(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/auth/logout`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${GetToken()}`,
+      },
+    }
+  );
+};
