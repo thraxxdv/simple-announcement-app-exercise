@@ -23,14 +23,13 @@ function AnnouncementItem({ id, title, content, startDate, endDate, setEditingId
         label="Edit Announcement"
         type="button"
         btnType="btn-secondary"
-        additionalClasses="d-block ms-auto"
         onClickCb={() => setEditingId(id)}
       />
       <Button
         label="Delete Announcement"
         type="button"
         btnType="btn-danger"
-        additionalClasses="d-block ms-auto"
+        additionalClasses="ms-3"
         onClickCb={handleDelete}
       />
     </div>
