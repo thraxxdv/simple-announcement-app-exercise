@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Input from "./elements/Input";
 import Button from "./elements/Button";
-import { createAnnouncement, getAnnouncement } from "../../api/announcement";
+import {
+  createAnnouncement,
+  getAnnouncement,
+  updateAnnouncement,
+} from "../../api/announcement";
 import Handle422Error from "../../utils/Handle422Error";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
-function AnnouncementForm({announcementId = 0}) {
+function AnnouncementForm({ announcementId = 0 }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -15,17 +19,16 @@ function AnnouncementForm({announcementId = 0}) {
   const router = useRouter();
 
   useEffect(() => {
-
     if (announcementId !== 0) {
       getAnnouncement(announcementId)
-      .then(r => {
-        let data = r.data;
-        setTitle(data.title);
-        setContent(data.content);
-        setStartDate(data.start_date);
-        setEndDate(data.end_date);
-      })
-      .catch(e => console.log(e))
+        .then((r) => {
+          let data = r.data;
+          setTitle(data.title);
+          setContent(data.content);
+          setStartDate(data.start_date);
+          setEndDate(data.end_date);
+        })
+        .catch((e) => console.log(e));
     }
 
     return () => {
@@ -33,31 +36,55 @@ function AnnouncementForm({announcementId = 0}) {
       setContent("");
       setStartDate("");
       setEndDate("");
-    }
-  }, [announcementId])
-  
+    };
+  }, [announcementId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (announcementId) {
-      
-    } else {
-      createAnnouncement(title, content, startDate, endDate)
-      .then((r) => {
-        toast("Announcement added succesfully! Page will reload in 5 seconds...", {
-          autoClose: false,
-          type: "success"
-        });
+      updateAnnouncement(
+        announcementId,
+        title,
+        content,
+        startDate,
+        endDate
+      ).then((r) => {
+        toast(
+          "Announcement UPDATED succesfully! Page will reload in 3 seconds...",
+          {
+            autoClose: false,
+            type: "success",
+          }
+        );
         setTimeout(() => {
-          router.reload(window.location.pathname)
-        }, 5000);
+          router.reload(window.location.pathname);
+        }, 3000);
       })
       .catch((e) => {
         if (e.response.status == 422) {
           Handle422Error(e.response.data.errors);
         }
       });
+    } else {
+      createAnnouncement(title, content, startDate, endDate)
+        .then((r) => {
+          toast(
+            "Announcement added succesfully! Page will reload in 3 seconds...",
+            {
+              autoClose: false,
+              type: "success",
+            }
+          );
+          setTimeout(() => {
+            router.reload(window.location.pathname);
+          }, 3000);
+        })
+        .catch((e) => {
+          if (e.response.status == 422) {
+            Handle422Error(e.response.data.errors);
+          }
+        });
     }
   };
 

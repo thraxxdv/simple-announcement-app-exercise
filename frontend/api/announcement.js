@@ -36,3 +36,21 @@ export const getAnnouncement = (id) => {
     }
   );
 };
+
+export const updateAnnouncement = (id, title, content, startDate, endDate) => {
+  return axios.put(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/announcements/${id}`,
+    {
+      id: id,
+      title: title,
+      content: content,
+      start_date: startDate,
+      end_date: endDate,
+    },
+    {
+      headers: {
+        "Authorization": `Bearer ${GetToken()}`
+      },
+    }
+  );
+};

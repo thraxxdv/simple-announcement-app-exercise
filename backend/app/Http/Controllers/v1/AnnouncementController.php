@@ -19,7 +19,7 @@ class AnnouncementController extends Controller
     {
         $validated = $request->validated();
 
-        return response()->json(Announcement::create($validated));
+        return response()->json(Announcement::create($validated), 201);
     }
     
     public function show(Announcement $announcement)
@@ -29,7 +29,14 @@ class AnnouncementController extends Controller
     
     public function update(AnnouncementRequest $request, Announcement $announcement)
     {
-        
+        $validated = $request->validated();
+        $announcement->title = $validated['title'];
+        $announcement->content = $validated['content'];
+        $announcement->start_date = $validated['start_date'];
+        $announcement->end_date = $validated['end_date'];
+        $announcement->save();
+
+        return response('', 204);
     }
 
     public function destroy(Announcement $announcement)
