@@ -1,35 +1,37 @@
 # Simple Announcement App Exercise
 
-### Note
-*As much as I hate to admit it, I did not finish this project. I know that I am capable of the functionalities given and to be honest, they sound rather simple especially with how Laravel structures its validations and React/Next JS handles component-based UI.*
-
-*With my current situation, having a full time job and being an independent adult living alone and having all the responsibilities that comes with it, a deadline less than 48 hours has proven to be a bit steep.*
-
 ## About the project
 This repository is a dockerized project intended to be ran on the reviewers machine seemlessly. The `backend` folder contains a Laravel application while the `frontend` folder contains a NextJS application.
 
-## Initializing the project
-1. Make sure that Docker is installed
-2. Open the root directory of this project in a terminal
-3. Run the command `docker-compose up` and it should build the containers needed to run the project
-4. Wait for the prompt that the project servers are ready
+### Notes
+_The frontend implementation of this application is a simple UI with 2 pages. This was not meant to be a means of showing how proficient I am design-wise but rather a minimal, non-over-engineered NextJS app to demonstrate my fundamental knowledge of React._
 
-This project automatically seeds
+_The same goes for the backend, the project requirements of this application is rather simple and very quick to utilize with Laravel without creating my own abstraction. Ideally, on a large application business logic should be handed over to service classes but I have chosen to put them in the HTTP controller in order to keep things minimal since most of the functions are one-liners. Again, emphasizing on not-overengineering and demonstrating my fundamental knowledge of Laravel._
+
+## Initializing the project
+1. Make sure that Docker is installed.
+2. Open the root directory of this project in a terminal.
+3. Run the command `docker-compose up` and it should build the containers needed to run the project.
+4. Wait for the prompt that the project servers are ready.
+
+_The environment variables are added into this repository, while it is not a good practice, this is a special case since this is a test project and I'm prioritizing easy installation._
+
+_This project automatically seeds test data into the database_
 
 ## Accessing the project
-**Backend** - The project's backend API is running at port 8080 in your local machine. Typing in `localhost:8080` in your web browser should take you to a Laravel default page
+**Backend** - The project's backend API is running at port 8080 in your local machine. Typing in `localhost:8080` in your web browser should take you to a Laravel default page. If the port is not available on your machine, stop the `docker-compose up` command and change the port number on line _18_ on the `docker-compose.yml` file.
 
-**Frontend** - The frontend api is pointed to `localhost:4000`. Visiting that should take you to a login page where you can login with `test@test.com` and password as `password`
+**Frontend** - The frontend api is pointed to `localhost:4000`. Visiting that should take you to a login page where you can login with `test@test.com` and password as `password`. If the port is not available on your machine, stop the `docker-compose up` command and change the port number on line _38_ on the `docker-compose.yml` file.
 
-## Project breakdown
-The backend is 80% done with only deleting announcement missing and unit tests. The frontend has a lot missing, but at this point in the project it only needs to be calling APIs.
+## API Routes
 
-So far, these are the completed API routes
+**Auth Routes**
 
-`POST /api/v1/auth/login` - Logging in route
-
-`POST /api/v1/auth/check` - To check if API token is still valid
-
-`GET /api/v1/announcements` - Get announcements
-
-`POST /api/v1/announcements` - Store announcements to DB
+`GET      api/v1/announcements` - Get announcements, sorted descending by start date.
+`POST     api/v1/announcements` - Create announcement.
+`GET      api/v1/announcements/{announcement}` - Get a single announcement.
+`PUT      api/v1/announcements/{announcement}` - Update an announcement.
+`DELETE   api/v1/announcements/{announcement}` - Delete an announcement,
+`POST     api/v1/auth/check` - Route for checking auth token validity.
+`POST     api/v1/auth/login` - Login route.
+`POST     api/v1/auth/logout` - Logout route.
