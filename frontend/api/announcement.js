@@ -26,3 +26,14 @@ export const createAnnouncement = (title, content, startDate, endDate) => {
     }
   );
 };
+
+export const getAnnouncement = (id) => {
+  return axios.get(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/announcements/${id}`,
+    {
+      headers: {
+        ...AuthHeader,
+      },
+    }
+  );
+};

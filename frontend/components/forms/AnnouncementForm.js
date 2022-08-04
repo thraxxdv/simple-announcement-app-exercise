@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Input from "./elements/Input";
 import Button from "./elements/Button";
-import { createAnnouncement } from "../../api/announcement";
+import { createAnnouncement, getAnnouncement } from "../../api/announcement";
 import Handle422Error from "../../utils/Handle422Error";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -17,7 +17,15 @@ function AnnouncementForm({announcementId = 0}) {
   useEffect(() => {
 
     if (announcementId !== 0) {
-      console.log(announcementId);
+      getAnnouncement(announcementId)
+      .then(r => {
+        let data = r.data;
+        setTitle(data.title);
+        setContent(data.content);
+        setStartDate(data.start_date);
+        setEndDate(data.end_date);
+      })
+      .catch(e => console.log(e))
     }
 
     return () => {
@@ -32,7 +40,10 @@ function AnnouncementForm({announcementId = 0}) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    createAnnouncement(title, content, startDate, endDate)
+    if (announcementId) {
+      
+    } else {
+      createAnnouncement(title, content, startDate, endDate)
       .then((r) => {
         toast("Announcement added succesfully! Page will reload in 5 seconds...", {
           autoClose: false,
@@ -47,6 +58,7 @@ function AnnouncementForm({announcementId = 0}) {
           Handle422Error(e.response.data.errors);
         }
       });
+    }
   };
 
   return (
@@ -89,7 +101,7 @@ function AnnouncementForm({announcementId = 0}) {
         />
       </div>
       <Button
-        label="Add Announcement"
+        label={announcementId ? "Update Announcement" : "Add Announcement"}
         additionalClasses="mt-4 mx-auto d-block"
       />
     </form>
